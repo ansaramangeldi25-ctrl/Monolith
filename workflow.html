@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DocScan Workflow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-workflow">
+  <header class="nav-shell glass">
+    <a class="brand-mark" href="landing.html">DocScan</a>
+    <a class="btn ghost" href="landing.html">Back</a>
+  </header>
+
+  <main class="workflow-main">
+    <section class="upload-card glass">
+      <p class="eyebrow">Upload</p>
+      <h1>Drop a JPEG for instant analysis</h1>
+      <p>We keep the workflow quiet and deliberate. Choose a single document image, then watch the placeholder update with the response.</p>
+
+      <label class="dropzone" for="fileInput">
+        <input id="fileInput" type="file" accept="image/jpeg,image/png" />
+        <span>Drag a JPEG or tap to browse</span>
+      </label>
+
+      <div class="preview-frame">
+        <img id="uploadPreview" alt="Preview" />
+        <span id="previewPlaceholder">Awaiting file</span>
+      </div>
+
+      <button id="scanBtn" class="btn primary">Analyze</button>
+    </section>
+
+    <section class="result-card glass">
+      <p class="eyebrow">Result</p>
+      <div class="result-header">
+        <h2>Status</h2>
+        <div class="view-toggle" role="tablist" aria-label="Result view">
+          <button class="btn toggle active" data-view="json" role="tab" aria-selected="true">JSON</button>
+          <button class="btn toggle" data-view="visual" role="tab" aria-selected="false">Visual</button>
+        </div>
+      </div>
+      <div class="clipboard-row">
+        <span id="resultStatus">No scan yet.</span>
+        <button id="copyJsonBtn" class="btn ghost small" type="button">Copy JSON</button>
+      </div>
+      <pre id="jsonOutput" class="result-output">No scan yet.</pre>
+      <div id="visualOutput" class="visual-output hidden">
+        <div class="visual-placeholder" id="visualPlaceholder">Run a scan to see the label visualization.</div>
+        <img id="visualImage" alt="Label visualization" />
+      </div>
+    </section>
+  </main>
+
+  <script src="workflow.js" defer></script>
+</body>
+</html>

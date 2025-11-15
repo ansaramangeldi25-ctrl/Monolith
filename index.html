@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Document CV: Signatures / Stamps / QR</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- OpenCV.js -->
+  <script async src="https://docs.opencv.org/4.x/opencv.js"></script>
+  <!-- jsQR for QR scanning -->
+  <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Document Computer Vision — Signatures, Stamps, QR</h1>
+
+    <section class="controls">
+      <div>
+        <label>Camera:</label>
+        <select id="videoSelect"></select>
+        <button id="startCamera">Start Camera</button>
+        <button id="stopCamera" disabled>Stop Camera</button>
+        <button id="captureBtn" disabled>Capture</button>
+      </div>
+      <div>
+        <label for="fileInput">Upload image:</label>
+        <input id="fileInput" type="file" accept="image/*" />
+        <button id="processUpload">Process Upload</button>
+      </div>
+      <div>
+        <button id="runDetect" disabled>Run Detection on Current Image</button>
+        <button id="clearCanvas">Clear</button>
+      </div>
+    </section>
+
+    <section class="viewer">
+      <video id="video" autoplay playsinline></video>
+      <canvas id="canvas"></canvas>
+    </section>
+
+    <section class="log">
+      <h2>Detections</h2>
+      <ul id="logList"></ul>
+    </section>
+
+    <footer>
+      <small>Uses OpenCV.js and jsQR. This is a heuristic detector for demo and testing.</small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
