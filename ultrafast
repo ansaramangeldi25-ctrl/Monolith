@@ -1,0 +1,41 @@
+// Example 2: Express.js mock server with artificial latency on specific routes
+import express, { Request, Response } from 'express';
+
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
+
+// Helper to add random latency (2-8 seconds)
+const addLatency = (min: number = 2000, max: number = 8000): Promise<void> => {
+  const latency = Math.floor(Math.random() * (max - min + 1)) + min;
+  return delay(latency);
+};
+
+// Simple utility delay (same as above)
+function delay(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Route with fixed 5-second delay
+app.get('/api/slow-fixed', async (req: Request, res: Response) => {
+  await delay(5000);
+  res.json({ message: 'Response after fixed 5s delay', status: 'success' });
+});
+
+// Route with random latency
+app.get('/api/slow-random', async (req: Request, res: Response) => {
+  await addLatency();
+  res.json({ message: 'Response after random delay (2-8s)', status: 'success' });
+});
+
+// Route that accepts a query param to control latency
+app.get('/api/slow-custom', async (req: Request, res: Response) => {
+  const customMs = parseInt(req.query.delay as string, 10) || 3000;
+  await delay(customMs);
+  res.json({ message: `Response after ${customMs}ms delay`, status: 'success' });
+});
+
+app.listen(PORT, () => {
+  console.log(`Mock server with artificial latency running on http://localhost:${PORT}`);
+});
